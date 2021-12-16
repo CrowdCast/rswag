@@ -33,19 +33,13 @@ module Rswag
         return if metadata[:document] == false
         return unless metadata.key?(:response)
 
-        swagger_doc = @config.get_swagger_doc(metadata[:swagger_doc])
-
-        unless doc_version(swagger_doc).start_with?('2')
-          # This is called multiple times per file!
-          # metadata[:operation] is also re-used between examples within file
-          # therefore be careful NOT to modify its content here.
-          upgrade_request_type!(metadata)
-          upgrade_servers!(swagger_doc)
-          upgrade_oauth!(swagger_doc)
-          upgrade_response_produces!(swagger_doc, metadata)
+        if metadata[:swagger_doc].is_a?(Array)
+          metadata[:swagger_doc].each do |swagger_doc|
+            deep_merge_doc!(@config.get_swagger_doc(swagger_doc), metadata)
+          end
+        else
+          deep_merge_doc!(@config.get_swagger_doc(metadata[:swagger_doc]), metadata)
         end
-
-        swagger_doc.deep_merge!(metadata_to_swagger(metadata))
       end
 
       def stop(_notification = nil)
@@ -198,6 +192,20 @@ module Rswag
         is_hash = value.is_a?(Hash)
         value.delete(:consumes) if is_hash && value.dig(:consumes)
         value.delete(:produces) if is_hash && value.dig(:produces)
+      end
+
+      def deep_merge_doc!(swagger_doc, metadata)
+        unless doc_version(swagger_doc).start_with?('2')
+          # This is called multiple times per file!
+          # metadata[:operation] is also re-used between examples within file
+          # therefore be careful NOT to modify its content here.
+          upgrade_request_type!(metadata)
+          upgrade_servers!(swagger_doc)
+          upgrade_oauth!(swagger_doc)
+          upgrade_response_produces!(swagger_doc, metadata)
+        end
+
+        swagger_doc.deep_merge!(metadata_to_swagger(metadata))
       end
     end
   end
