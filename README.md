@@ -1,6 +1,6 @@
 rswag
 =========
-[![Build Status](https://travis-ci.org/rswag/rswag.svg?branch=master)](https://travis-ci.org/rswag/rswag)
+[![Build Status](https://github.com/rswag/rswag/actions/workflows/ruby.yml/badge.svg?branch=master)](https://github.com/rswag/rswag/actions/workflows/ruby.yml?query=branch%3Amaster+)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1175b984edc4610f82ab/maintainability)](https://codeclimate.com/github/rswag/rswag/maintainability)
 
 OpenApi 3.0 and Swagger 2.0 compatible!
@@ -21,6 +21,7 @@ Once you have an API that can describe itself in Swagger, you've opened the trea
 |Rswag Version|Swagger (OpenAPI) Spec.|swagger-ui|
 |----------|----------|----------|
 |[master](https://github.com/rswag/rswag/tree/master)|3.0.3|3.52.5|
+|[2.5.1](https://github.com/rswag/rswag/tree/2.5.0)|3.0.3|3.52.5|
 |[2.3.0](https://github.com/rswag/rswag/tree/2.3.0)|3.0.3|3.23.11|
 |[2.2.0](https://github.com/rswag/rswag/tree/2.2.0)|2.0|3.18.2|
 |[1.6.0](https://github.com/rswag/rswag/tree/1.6.0)|2.0|2.2.5|
