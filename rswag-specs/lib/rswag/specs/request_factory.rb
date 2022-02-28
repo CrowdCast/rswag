@@ -12,6 +12,8 @@ module Rswag
       end
 
       def build_request(metadata, example)
+        metadata[:swagger_doc] = metadata[:swagger_doc].first if metadata[:swagger_doc].is_a?(Array)
+
         swagger_doc = @config.get_swagger_doc(metadata[:swagger_doc])
         parameters = expand_parameters(metadata, swagger_doc, example)
 
